@@ -1,6 +1,6 @@
 # Code and System Review Checklist:
 
-#Reviewer & reviewee’s  behaviour and  attitude when review other’s code:
+# Reviewer & reviewee’s  behaviour and  attitude when review other’s code:
 - Be kind
 - Accept that many programming decisions are opinions. Discuss trade offs, which you prefer, and reach a resolution quickly.
 - Ask questions; don’t make demands. (“What do you think about naming this :user_id?”)
@@ -15,7 +15,7 @@
 - If you ask a question to a specific person, always start the comment by mentioning them; this ensures they see it if their notification level is set to “mentioned” and other people understand they don’t have to respond.
  
 
-#Category/Area of Code Review:
+# Category/Area of Code Review:
 
 1.General
 2.Clean Code & Code style 
@@ -35,106 +35,106 @@
 16.API design
 
 # Clean Code:
-Use Intention-Revealing Names
-Pick one word per concept
-Use Solution/Problem Domain Names
-Classes should be small!
-Functions should be small!
-Do one Thing in a function.
-Don't Repeat Yourself (Avoid code Duplication).
-Explain yourself in code(write why in code not what)
-Make sure the code formatting is applied(Can us tools)
-Throw Exceptions rather than Return codes in case of business and technical error.
-Don’t return null from the method.
- Each method should do a single task. Don’t mix business logic and network calls with the same method. Try to make the method unit testable.
+- Use Intention-Revealing Names
+- Pick one word per concept
+- Use Solution/Problem Domain Names
+- Classes should be small!
+- Functions should be small!
+- Do one Thing in a function.
+- Don't Repeat Yourself (Avoid code Duplication).
+- Explain yourself in code(write why in code not what)
+- Make sure the code formatting is applied(Can us tools)
+- Throw Exceptions rather than Return codes in case of business and technical error.
+- Don’t return null from the method.
+- Each method should do a single task. Don’t mix business logic and network calls with the same method. Try to make the method unit testable.
 
 
 # General:
-Use checked exceptions for recoverable conditions and runtime exceptions for programming errors
-Try to use global exception handling and common Business and technical error response
-Never ignore exceptions. Don’t overlook the catch block.
-Return empty arrays or collections, not nulls.
-Minimize scope of local variables. For earlier GC.
-Avoid finalize
-Always override hashcode when override equal.
-Always override toString
-Use marker interface to define type
-Use an executor for tasks and thread.
-Use the BigDecimal value of the method for string to big decimal/double.
-Never use string literals at business logic check. Use enum or constant.
+- Use checked exceptions for recoverable conditions and runtime exceptions for programming errors
+- Try to use global exception handling and common Business and technical error response
+- Never ignore exceptions. Don’t overlook the catch block.
+- Return empty arrays or collections, not nulls.
+- Minimize scope of local variables. For earlier GC.
+- Avoid finalize
+- Always override hashcode when override equal.
+- Always override toString
+- Use marker interface to define type
+- Use an executor for tasks and thread.
+- Use the BigDecimal value of the method for string to big decimal/double.
+- Never use string literals at business logic check. Use enum or constant.
 
 # Secure Code:
-Use password as array of characters instead of String
-Make class final if not being used for inheritance
-Restrict privileges: Application to run with the least privilege mode required for functioning
-Check access control or authorization .
-Input into a system should be checked for valid data size and range and check mandatory input fields(boundary conditions)
-Avoid sensitive  data logging(like pin,password, card info)
-Purge sensitive information from exceptions (exposing file path, internals of the system, configuration)
-Consider purging(Call GC in case of java) highly sensitive from memory after use
-Be careful about SQL injection when DB queries.
-Check the api response fields. Is there any extra data or sensitive data shared to public client.
-Define wrappers around native methods (not declare a native method public).
-Make public static fields final (to avoid caller changing the value)
+- Use password as array of characters instead of String
+- Make class final if not being used for inheritance
+- Restrict privileges: Application to run with the least privilege mode required for functioning
+- Check access control or authorization .
+- Input into a system should be checked for valid data size and range and check mandatory input fields(boundary conditions)
+- Avoid sensitive  data logging(like pin,password, card info)
+- Purge sensitive information from exceptions (exposing file path, internals of the system, configuration)
+- Consider purging(Call GC in case of java) highly sensitive from memory after use
+- Be careful about SQL injection when DB queries.
+- Check the api response fields. Is there any extra data or sensitive data shared to public client.
+- Define wrappers around native methods (not declare a native method public).
+- Make public static fields final (to avoid caller changing the value)
 
 # Performance:
-Avoid excessive synchronization for thread safety. Try to avoid sharing resources in case of a multithreaded environment.  
-Try to keep Synchronized section small operation(cpu/network/memory)
-Avoid string literal concatenation. Try to use a string builder.
-Avoid creating unnecessary objects.
-Incase of network calls try to use connection pool, thread pool, socket pool.
-Profine DB query and check search query happen on indexed field
-Release resources (Streams, Connections, etc) in all cases
-Careful about ORM N+1 query
-Cache, distributed cache, Asynchronous Process(RabitMQ/Kafka)
-Think about IO latency and CPU usage. 
-Check if any unused library goes into production build.
-Incase of in memory store avoid full object serialization and use custom serialization to save memory
+- Avoid excessive synchronization for thread safety. Try to avoid sharing resources in case of a multithreaded environment.  
+- Try to keep Synchronized section small operation(cpu/network/memory)
+- Avoid string literal concatenation. Try to use a string builder.
+- Avoid creating unnecessary objects.
+- Incase of network calls try to use connection pool, thread pool, socket pool.
+- Profine DB query and check search query happen on indexed field
+- Release resources (Streams, Connections, etc) in all cases
+- Careful about ORM N+1 query
+- Cache, distributed cache, Asynchronous Process(RabitMQ/Kafka)
+- Think about IO latency and CPU usage. 
+- Check if any unused library goes into production build.
+- Incase of in memory store avoid full object serialization and use custom serialization to save memory
 
 # Concurrency:
-Avoid member variables when we use spring singleton beans.
-Always sychoronze share resource
-Use concurrentHashMap instead of Synchronize HashMap
-Use HashMap or HashSet instead if TreeMap/Set when ordering is not important. 
+- Avoid member variables when we use spring singleton beans.
+- Always sychoronze share resource
+- Use concurrentHashMap instead of Synchronize HashMap
+- Use HashMap or HashSet instead if TreeMap/Set when ordering is not important. 
 
 # Error Handling:
-Reply consistent error response to client.
-Handle proper error code(401,404,400 and 500)
-Use custom error code for business logic.
-Use Language map for error messages. 
-Categories
- Business logic error
-Technical Error
-Upstream Service Error
-Common Error
+- Reply consistent error response to client.
+- Handle proper error code(401,404,400 and 500)
+- Use custom error code for business logic.
+- Use Language map for error messages. 
+- Categories
+ - Business logic error
+ - Technical Error
+ - Upstream Service Error
+- Common Error
 
 # Logging & Tracing:
-Maintain proper level
-Use {} to pass variables at SLF4j, when concat string.
-Don’t trace excessive logs.
-Distributed tracing (Spring cloud sleuth, Zipkin,ELK)
-Sensitive Info
-Log User Context
-In case of centralized log Use common trace id and service name. 
+- Maintain proper level
+- Use {} to pass variables at SLF4j, when concat string.
+- Don’t trace excessive logs.
+- Distributed tracing (Spring cloud sleuth, Zipkin,ELK)
+- Sensitive Info
+ -Log User Context
+- In case of centralized log Use common trace id and service name. 
 
 # Application Security:
-Proper authentication and authorization
-Any insecure operation or api
-Separate public and private/internal api
-Incase of micro service try to use central auth server
-Check about authentication and authorization network overhead
-Never use default credentials at production. Specially for system/infrastructure related services.(DB,Cache,Auth,API GW, Http server,3rd party library)
-Store password hash using salt
-Encrypt or one way hash for OTP and other party credentials.
-Do you ensure security of your rest api(https://betterprogramming.pub/10-essential-tips-for-writing-secure-rest-api-e297990d48c5)
+- Proper authentication and authorization
+- Any insecure operation or api
+- Separate public and private/internal api
+ -Incase of micro service try to use central auth server
+- Check about authentication and authorization network overhead
+- Never use default credentials at production. Specially for system/infrastructure related services.(DB,Cache,Auth,API GW, Http server,3rd party library)
+- Store password hash using salt
+- Encrypt or one way hash for OTP and other party credentials.
+- Do you ensure security of your rest api(https://betterprogramming.pub/10-essential-tips-for-writing-secure-rest-api-e297990d48c5)
 
 # Architecture:
-Does yous system follow all good system design and architecture pattern
-Does it follow twelve factor app(https://12factor.net)
-Do you follow distributed system fallacy (https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing)
-For the Data layer follow lambda architecture.
-Do you follow only request response or event based architecture.
-Do you follow 12 architecture principle
+- Does yous system follow all good system design and architecture pattern
+- Does it follow twelve factor app(https://12factor.net)
+- Do you follow distributed system fallacy (https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing)
+- For the Data layer follow lambda architecture.
+- Do you follow only request response or event based architecture.
+- Do you follow 12 architecture principle
 1.N+1 Design. Never less than two of anything and remember the rule of three
 2.Design for Rollback. Ensure you can roll back any release of functionality 
 3.Design to be disabled. Be able to turn off anything you released
@@ -150,63 +150,63 @@ Do you follow 12 architecture principle
 
 
 # Design Pattern:
-SOLID
-DRY
-KISS
-Creational Pattern(Singleton,Factory,Builder,Adapter)
-Behavioral Pattern(Strategy,Chain Responsibility,Observer)
+- SOLID
+- DRY
+- KISS
+- Creational Pattern(Singleton,Factory,Builder,Adapter)
+- Behavioral Pattern(Strategy,Chain Responsibility,Observer)
 
 # Scalability:
-Can system easily scalable 
-Is your service elastic
-Use stateless service for horizontal scalability.
-DB Sharding
-DB Partition 
-DB replication
-Use read replica to independent read operation
-Cache high read and low write operation
-Check and monitor DB read and write query ration.
-Use fail first and circuit breaker mechanism
-Network call overhead (use socket pool or grpc)
-Check alway DB network call round trip. Alway try to reduce it.
-Did you address c10K problem for network communication?
+- Can system easily scalable 
+- Is your service elastic
+- Use stateless service for horizontal scalability.
+- DB Sharding
+- DB Partition 
+- DB replication
+- Use read replica to independent read operation
+- Cache high read and low write operation
+- Check and monitor DB read and write query ration.
+- Use fail first and circuit breaker mechanism
+ -Network call overhead (use socket pool or grpc)
+- Check alway DB network call round trip. Alway try to reduce it.
+- Did you address c10K problem for network communication?
 
 # Reliability & Availability:
-Handle Timeout
-Implement Circuit Breaker Pattern
-Implement Bulkhead pattern
-Implement idempotent operation  
-Maintainability & Testability:
-How much test coverage 
-Unit, Integration and System Testing
-Proper CI/CD pipeline
-Any option for canary deployment
+- Handle Timeout
+- Implement Circuit Breaker Pattern
+- Implement Bulkhead pattern
+- Implement idempotent operation  
+- Maintainability & Testability:
+- How much test coverage 
+- Unit, Integration and System Testing
+- Proper CI/CD pipeline
+- Any option for canary deployment
 
 
 
 # Monitoring:
-Can you monitor your system health and resources?
-Can you monitor your business performance?
-Domain:
-Business Logic implemented properly at code base
-Service properly isolated against domain and bounded context.
-Try to follow domain driven design.
+- Can you monitor your system health and resources?
+- Can you monitor your business performance?
+# Domain:
+- Business Logic implemented properly at code base
+- Service properly isolated against domain and bounded context.
+- Try to follow domain driven design.
 
 
 # PCI DSS:(For FinTech):
-12 requirements:
-Install and maintain a firewall configuration to protect cardholder data
-Do not use vendor-supplied defaults for system passwords and other security parameters
-Protect stored cardholder data
-Encrypt transmission of cardholder data across open, public networks
-Use and regularly update anti-virus software or programs
-Develop and maintain secure systems and applications
-Restrict access to cardholder data by business need to know
-Assign a unique ID to each person with computer access
-Restrict physical access to cardholder data
-Track and monitor all access to network resources and cardholder data
-Regularly test security systems and processes
-Maintain a policy that addresses information security for all personnel
+- 12 requirements:
+- Install and maintain a firewall configuration to protect cardholder data
+- Do not use vendor-supplied defaults for system passwords and other security parameters
+- Protect stored cardholder data
+- Encrypt transmission of cardholder data across open, public networks
+- Use and regularly update anti-virus software or programs
+- Develop and maintain secure systems and applications
+- Restrict access to cardholder data by business need to know
+- Assign a unique ID to each person with computer access
+- Restrict physical access to cardholder data
+- Track and monitor all access to network resources and cardholder data
+- Regularly test security systems and processes
+- Maintain a policy that addresses information security for all personnel
 
 
 # API Design:
