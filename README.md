@@ -1,39 +1,40 @@
-Code and System Review Checklist:
+# Code and System Review Checklist:
 
-Reviewer & reviewee’s  behaviour and  attitude when review other’s code:
-Be kind
-Accept that many programming decisions are opinions. Discuss trade offs, which you prefer, and reach a resolution quickly.
-Ask questions; don’t make demands. (“What do you think about naming this :user_id?”)
-Ask for clarification. (“I didn’t understand. Can you clarify?”)
-Avoid selective ownership of code. (“mine”, “not mine”, “yours”)
-Avoid using terms that could be seen as referring to personal traits. (“dumb”, “stupid”). Assume everyone is intelligent and well-meaning.
-Be explicit. Remember people don’t always understand your intentions online.
-Be humble. (“I’m not sure - let’s look it up.”)
-Don’t use hyperbole. (“always”, “never”, “endlessly”, “nothing”)
-Be careful about the use of sarcasm. Everything we do is public; what seems like good-natured ribbing to you and a long-time colleague might come off as mean and unwelcoming to a person new to the project.
-Consider one-on-one chats or video calls if there are too many “I didn’t understand” or “Alternative solution:” comments. Post a follow-up comment summarizing one-on-one discussion.
-If you ask a question to a specific person, always start the comment by mentioning them; this ensures they see it if their notification level is set to “mentioned” and other people understand they don’t have to respond.
+#Reviewer & reviewee’s  behaviour and  attitude when review other’s code:
+- Be kind
+- Accept that many programming decisions are opinions. Discuss trade offs, which you prefer, and reach a resolution quickly.
+- Ask questions; don’t make demands. (“What do you think about naming this :user_id?”)
+- Ask for clarification. (“I didn’t understand. Can you clarify?”)
+- Avoid selective ownership of code. (“mine”, “not mine”, “yours”)
+- Avoid using terms that could be seen as referring to personal traits. (“dumb”, “stupid”). Assume everyone is intelligent and well-meaning.
+- Be explicit. Remember people don’t always understand your intentions online.
+- Be humble. (“I’m not sure - let’s look it up.”)
+- Don’t use hyperbole. (“always”, “never”, “endlessly”, “nothing”)
+- Be careful about the use of sarcasm. Everything we do is public; what seems like good-natured ribbing to you and a long-time colleague might come off as mean and unwelcoming to a person new to the project.
+- Consider one-on-one chats or video calls if there are too many “I didn’t understand” or “Alternative solution:” comments. Post a follow-up comment summarizing one-on-one discussion.
+- If you ask a question to a specific person, always start the comment by mentioning them; this ensures they see it if their notification level is set to “mentioned” and other people understand they don’t have to respond.
  
 
-Category/Area of Code Review:
-General
-Clean Code & Code style 
-Secure Coding
-Performance 
-Logging and Tracing
-Concurrency 
-Application Security
-Error Handling
-Maintainability & Testability
-Domain(Business Logic)
-Design and Architecture
-Scalability 
-Reliability & Availability
-Design pattern
-PCI DSS(FinTech)
-API design
+#Category/Area of Code Review:
 
-Clean Code:
+1.General
+2.Clean Code & Code style 
+3.Secure Coding
+4.Performance 
+5.Logging and Tracing
+6.Concurrency 
+7.Application Security
+8.Error Handling
+9.Maintainability & Testability
+10.Domain(Business Logic)
+11.Design and Architecture
+12.Scalability 
+13.Reliability & Availability
+14.Design pattern
+15.PCI DSS(FinTech)
+16.API design
+
+# Clean Code:
 Use Intention-Revealing Names
 Pick one word per concept
 Use Solution/Problem Domain Names
@@ -48,7 +49,7 @@ Don’t return null from the method.
  Each method should do a single task. Don’t mix business logic and network calls with the same method. Try to make the method unit testable.
 
 
-General:
+# General:
 Use checked exceptions for recoverable conditions and runtime exceptions for programming errors
 Try to use global exception handling and common Business and technical error response
 Never ignore exceptions. Don’t overlook the catch block.
@@ -62,7 +63,7 @@ Use an executor for tasks and thread.
 Use the BigDecimal value of the method for string to big decimal/double.
 Never use string literals at business logic check. Use enum or constant.
 
-Secure Code:
+# Secure Code:
 Use password as array of characters instead of String
 Make class final if not being used for inheritance
 Restrict privileges: Application to run with the least privilege mode required for functioning
@@ -75,7 +76,8 @@ Be careful about SQL injection when DB queries.
 Check the api response fields. Is there any extra data or sensitive data shared to public client.
 Define wrappers around native methods (not declare a native method public).
 Make public static fields final (to avoid caller changing the value)
-Performance:
+
+# Performance:
 Avoid excessive synchronization for thread safety. Try to avoid sharing resources in case of a multithreaded environment.  
 Try to keep Synchronized section small operation(cpu/network/memory)
 Avoid string literal concatenation. Try to use a string builder.
@@ -89,12 +91,13 @@ Think about IO latency and CPU usage.
 Check if any unused library goes into production build.
 Incase of in memory store avoid full object serialization and use custom serialization to save memory
 
-Concurrency:
+# Concurrency:
 Avoid member variables when we use spring singleton beans.
 Always sychoronze share resource
 Use concurrentHashMap instead of Synchronize HashMap
 Use HashMap or HashSet instead if TreeMap/Set when ordering is not important. 
-Error Handling:
+
+# Error Handling:
 Reply consistent error response to client.
 Handle proper error code(401,404,400 and 500)
 Use custom error code for business logic.
@@ -105,7 +108,7 @@ Technical Error
 Upstream Service Error
 Common Error
 
-Logging & Tracing:
+# Logging & Tracing:
 Maintain proper level
 Use {} to pass variables at SLF4j, when concat string.
 Don’t trace excessive logs.
@@ -113,7 +116,8 @@ Distributed tracing (Spring cloud sleuth, Zipkin,ELK)
 Sensitive Info
 Log User Context
 In case of centralized log Use common trace id and service name. 
-Application Security:
+
+# Application Security:
 Proper authentication and authorization
 Any insecure operation or api
 Separate public and private/internal api
@@ -123,7 +127,8 @@ Never use default credentials at production. Specially for system/infrastructure
 Store password hash using salt
 Encrypt or one way hash for OTP and other party credentials.
 Do you ensure security of your rest api(https://betterprogramming.pub/10-essential-tips-for-writing-secure-rest-api-e297990d48c5)
-Architecture:
+
+# Architecture:
 Does yous system follow all good system design and architecture pattern
 Does it follow twelve factor app(https://12factor.net)
 Do you follow distributed system fallacy (https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing)
@@ -144,13 +149,14 @@ Do you follow 12 architecture principle
 12.Commodity Hardware. Cheaper is better most of the time.  
 
 
-Design Pattern:
+# Design Pattern:
 SOLID
 DRY
 KISS
 Creational Pattern(Singleton,Factory,Builder,Adapter)
 Behavioral Pattern(Strategy,Chain Responsibility,Observer)
-Scalability:
+
+# Scalability:
 Can system easily scalable 
 Is your service elastic
 Use stateless service for horizontal scalability.
@@ -164,7 +170,8 @@ Use fail first and circuit breaker mechanism
 Network call overhead (use socket pool or grpc)
 Check alway DB network call round trip. Alway try to reduce it.
 Did you address c10K problem for network communication?
-Reliability & Availability:
+
+# Reliability & Availability:
 Handle Timeout
 Implement Circuit Breaker Pattern
 Implement Bulkhead pattern
@@ -177,10 +184,8 @@ Any option for canary deployment
 
 
 
-Monitoring:
+# Monitoring:
 Can you monitor your system health and resources?
-
-
 Can you monitor your business performance?
 Domain:
 Business Logic implemented properly at code base
@@ -188,7 +193,7 @@ Service properly isolated against domain and bounded context.
 Try to follow domain driven design.
 
 
-PCI DSS:(For FinTech):
+# PCI DSS:(For FinTech):
 12 requirements:
 Install and maintain a firewall configuration to protect cardholder data
 Do not use vendor-supplied defaults for system passwords and other security parameters
@@ -204,7 +209,7 @@ Regularly test security systems and processes
 Maintain a policy that addresses information security for all personnel
 
 
-API Design:
+# API Design:
 Use kebab-case for URLs
 Bad:
 /systemOrders or /system_orders
